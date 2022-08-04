@@ -14,7 +14,6 @@ const Register = ({ navigate }) => {
     resolver: yupResolver(registerSchema),
   });
 
-  console.log(errors);
   const onSubmit = (data) => {
     api
       .post(`/users`, data)
@@ -35,22 +34,22 @@ const Register = ({ navigate }) => {
       <Toaster />
       <form onSubmit={handleSubmit(onSubmit)}>
         <label htmlFor="name">
-          <h3>Nome</h3>
+          <p>Nome</p>
           <input id="name" {...register("name")} />
           <p>{errors.name?.message}</p>
         </label>
         <label htmlFor="email">
-          <h3>Email</h3>
+          <p>Email</p>
           <input id="email" {...register("email")} />
           <p>{errors.email?.message}</p>
         </label>
         <label htmlFor="password">
-          <h3>Senha</h3>
+          <p>Senha</p>
           <input type="password" id="password" {...register("password")} />
           <p>{errors.password?.message}</p>
         </label>
         <label htmlFor="passwordConfirm">
-          <h3>Confirmar senha</h3>
+          <p>Confirmar senha</p>
           <input
             type="password"
             id="passwordConfirm"
@@ -59,18 +58,28 @@ const Register = ({ navigate }) => {
           <p>{errors.passwordConfirm?.message}</p>
         </label>
         <label htmlFor="bio">
-          <h3>Bio</h3>
+          <p>Bio</p>
           <input id="bio" {...register("bio")} />
           <p>{errors.bio?.message}</p>
         </label>
         <label htmlFor="contact">
-          <h3>Contato</h3>
+          <p>Contato</p>
           <input id="contact" {...register("contact")} />
           <p>{errors.contact?.message}</p>
         </label>
+
         <label htmlFor="course_module">
-          <h3>Selecionar modulo</h3>
-          <input id="course_module" {...register("course_module")} />
+          <p>Selecionar modulo</p>
+          <select id="course_module" {...register("course_module")}>
+            <option value="">Modulo</option>
+            <option value="M1">Modulo 01</option>
+            <option value="M2">Modulo 02</option>
+            <option value="M3">Modulo 03</option>
+            <option value="M4">Modulo 04</option>
+            <option value="M5">Modulo 05</option>
+            <option value="M6">Modulo 06</option>
+            <option value="Graduated">Formado</option>
+          </select>
           <p>{errors.course_module?.message}</p>
         </label>
         <p>
