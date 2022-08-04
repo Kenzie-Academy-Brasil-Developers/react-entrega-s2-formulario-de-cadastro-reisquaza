@@ -37,7 +37,7 @@ const RoutesMain = () => {
       <Route path="/register" element={<Register navigate={navigate} />} />
       <Route
         path="/dashboard"
-        element={<Dashboard setAuthorized={setAuthorized} />}
+        element={<Dashboard navigate={navigate} setAuthorized={setAuthorized} user={user} token={token}/>}
       />
       <Route path="*" element={<Navigate replace to={"login"} />} />
     </Routes>
