@@ -3,6 +3,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { loginSchema } from "../../validators/user";
 import api from "../../services/api";
 import toast, { Toaster } from "react-hot-toast";
+import { Link } from "react-router-dom";
 
 const Login = ({ setAuthorized, setUser, navigate }) => {
   const {
@@ -24,6 +25,7 @@ const Login = ({ setAuthorized, setUser, navigate }) => {
 
         setAuthorized(true);
         setUser(res.data.user);
+        navigate('/dashboard', {replace: true})
       })
       .catch((err) => {
         toast.error(err.response.data.message);
@@ -46,7 +48,7 @@ const Login = ({ setAuthorized, setUser, navigate }) => {
         </label>
         <button type="submit">Login</button>
       </form>
-      <button onClick={() => navigate('/register', {replace: true})} >TTTTTTTTTTTTTTT</button>
+      <Link to={"/register"}> Ainda não possui uma conta?</Link>
     </div>
   );
 };

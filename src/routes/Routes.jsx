@@ -12,15 +12,15 @@ const RoutesMain = () => {
   const navigate = useNavigate();
 
   // useEffect(() => {
-  //   // if (!token) {
-  //   //   setAuthorized(false);
-  //   // }
+  // if (!token) {
+  //   setAuthorized(false);
+  // }
   //   if (!authorized) {
   //     navigate("/login");
   //   } else {
   //     navigate("/dashboard", { replace: true });
   //   }
-  // }, [authorized, navigate, token]);
+  // });
 
   return (
     <Routes>
@@ -34,7 +34,7 @@ const RoutesMain = () => {
           />
         }
       />
-      <Route path="/register" element={<Register />} />
+      <Route path="/register" element={<Register navigate={navigate} />} />
       <Route
         path="/dashboard"
         element={<Dashboard setAuthorized={setAuthorized} />}
