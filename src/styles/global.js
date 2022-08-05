@@ -26,10 +26,17 @@ export default createGlobalStyle`
     outline:0;
     box-sizing: border-box;
   }
+
   body,html{
     width: 100vw;
     height: 100vh;
   }
+
+  #root{
+    width: 100%;
+    height: 100%;
+  }
+
   body {
     background: var(--color-gray-4);
     color: var(--color-gray-1);
@@ -40,14 +47,24 @@ export default createGlobalStyle`
     font-family: 'Roboto';
     font-size: 1.6rem;
   }
+  h1{
+    color: var(--color-primary)
+  }
   h1, h2, h3 {
     font-weight: bold;
+  }
+  h4{
+    color: var(--color-error);
   }
  h4,h5, h6, strong {
     font-weight: 500;
   }
   button {
     cursor: pointer;
+  }
+  a {
+    text-decoration: none;
+    color: var(--color-gray-0);
   }
   /* width */
   ::-webkit-scrollbar {
