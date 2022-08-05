@@ -47,7 +47,7 @@ export const Form = styled.form`
     height: 55%;
 
     label {
-      height: 25%;
+      height: 20%;
     }
   }
   @media screen and (min-width: 1024px) {
