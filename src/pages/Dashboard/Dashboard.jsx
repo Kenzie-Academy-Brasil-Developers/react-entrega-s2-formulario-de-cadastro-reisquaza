@@ -1,19 +1,20 @@
 import { useEffect } from "react";
+import Container from "../../styles/container";
 
 const Dashboard = ({ setAuthorized, user, navigate, token }) => {
   const logout = () => {
     window.localStorage.clear();
-    navigate("/login");
+    navigate("/login", { replace: true });
   };
 
   useEffect(() => {
     if (!token) {
-      navigate("/login");
+      navigate("/login", { replace: true });
     }
   }, [token, navigate]);
 
   return (
-    <>
+    <Container>
       <header>
         <h1>Kenzie Hub</h1>
         <button onClick={() => logout()}>Sair</button>
@@ -28,7 +29,7 @@ const Dashboard = ({ setAuthorized, user, navigate, token }) => {
           Nossa aplicação está em desenvolvimento, em breve teremos novidades
         </h3>
       </div>
-    </>
+    </Container>
   );
 };
 
