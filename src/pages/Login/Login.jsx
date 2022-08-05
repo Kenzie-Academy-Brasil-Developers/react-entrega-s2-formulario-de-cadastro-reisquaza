@@ -3,7 +3,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { loginSchema } from "../../validators/user";
 import api from "../../services/api";
 import toast, { Toaster } from "react-hot-toast";
-import Container from "../../styles/container";
+import { ContainerForm } from "../../styles/container";
 import { Button, ButtonGray } from "../../components/Button";
 import { Form } from "../../components/Form";
 
@@ -43,7 +43,7 @@ const Login = ({ setAuthorized, setUser, navigate }) => {
   };
 
   return (
-    <Container>
+    <ContainerForm>
       <Toaster position="top-right" reverseOrder={false} />
       <h1>Kenzie Hub</h1>
       <Form
@@ -69,7 +69,7 @@ const Login = ({ setAuthorized, setUser, navigate }) => {
           </ButtonGray>
         </div>
       </Form>
-    </Container>
+    </ContainerForm>
   );
 };
 

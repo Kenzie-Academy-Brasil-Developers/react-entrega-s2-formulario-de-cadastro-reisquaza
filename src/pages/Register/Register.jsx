@@ -6,7 +6,7 @@ import toast, { Toaster } from "react-hot-toast";
 import api from "../../services/api";
 import { FormRegister } from "../../components/Form";
 import { Button } from "../../components/Button";
-import Container from "../../styles/container";
+import { ContainerForm } from "../../styles/container";
 
 const Register = ({ navigate }) => {
   const {
@@ -41,7 +41,7 @@ const Register = ({ navigate }) => {
   };
 
   return (
-    <Container>
+    <ContainerForm>
       <Toaster position="top-right" reverseOrder={false} />
       <h1>Kenzie Hub</h1>
       <FormRegister onSubmit={handleSubmit(onSubmit)}>
@@ -99,7 +99,7 @@ const Register = ({ navigate }) => {
         </p>
         <Button type="submit">Cadastrar</Button>
       </FormRegister>
-    </Container>
+    </ContainerForm>
   );
 };
 

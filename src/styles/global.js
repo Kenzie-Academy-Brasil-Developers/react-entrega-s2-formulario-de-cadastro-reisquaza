@@ -47,20 +47,22 @@ export default createGlobalStyle`
     font-family: 'Roboto';
     font-size: 1.6rem;
   }
-  h1{
-    color: var(--color-primary)
-  }
   h1, h2, h3 {
     font-weight: bold;
+    color: var(--color-gray-0)
   }
-  h4{
-    color: var(--color-error);
-  }
- h4,h5, h6, strong {
+  h4,h5, h6, strong {
     font-weight: 500;
   }
   button {
     cursor: pointer;
+  }
+
+  h1{
+    color: var(--color-primary)
+  }
+  h4{
+    color: var(--color-error);
   }
   a {
     text-decoration: none;

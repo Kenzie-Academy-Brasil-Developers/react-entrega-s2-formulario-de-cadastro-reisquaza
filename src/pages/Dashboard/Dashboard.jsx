@@ -1,5 +1,7 @@
 import { useEffect } from "react";
-import Container from "../../styles/container";
+import Nav from "../../components/Nav";
+import { Container, ContainerHeader } from "../../styles/container";
+import { Header } from "./style";
 
 const Dashboard = ({ setAuthorized, user, navigate, token }) => {
   const logout = () => {
@@ -14,22 +16,23 @@ const Dashboard = ({ setAuthorized, user, navigate, token }) => {
   }, [token, navigate]);
 
   return (
-    <Container>
-      <header>
-        <h1>Kenzie Hub</h1>
-        <button onClick={() => logout()}>Sair</button>
-      </header>
-      <div>
-        <h2>Olá, {user.name}</h2>
-        <p>{user.course_module}</p>
-      </div>
-      <div>
-        <h2>Que pena! Estamos em desenvolvimento</h2>
-        <h3>
-          Nossa aplicação está em desenvolvimento, em breve teremos novidades
-        </h3>
-      </div>
-    </Container>
+    <>
+      <Nav logout={logout} />
+      <Header>
+        <ContainerHeader>
+          <h2>Olá, {user.name}</h2>
+          <p>{user.course_module}</p>
+        </ContainerHeader>
+      </Header>
+      <Container>
+        <div>
+          <h2>Que pena! Estamos em desenvolvimento</h2>
+          <h3>
+            Nossa aplicação está em desenvolvimento, em breve teremos novidades
+          </h3>
+        </div>
+      </Container>
+    </>
   );
 };
 
