@@ -74,6 +74,9 @@ export default createGlobalStyle`
     text-decoration: none;
     color: var(--color-gray-0);
   }
+  ul {
+    list-style: none;
+  }
   /* width */
   ::-webkit-scrollbar {
     width: 10px;

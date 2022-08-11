@@ -23,21 +23,6 @@ const Register = () => {
 
   return (
     <ContainerForm>
-      <ToastContainer
-        position="top-right"
-        autoClose={3000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        toastStyle={{
-          color: "var(--color-gray-0)",
-          backgroundColor: "var(--color-gray-3)",
-        }}
-      />
       <h1>Kenzie Hub</h1>
       <FormRegister onSubmit={handleSubmit(singUp)}>
         <label htmlFor="name">

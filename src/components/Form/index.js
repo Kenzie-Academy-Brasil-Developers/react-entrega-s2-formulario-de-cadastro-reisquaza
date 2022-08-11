@@ -25,6 +25,7 @@ export const Form = styled.form`
     color: var(--color-gray-0);
     border: 1px solid var(--color-gray-0);
     margin: 2px;
+    font-size: 18px;
   }
 
   select {
@@ -34,6 +35,7 @@ export const Form = styled.form`
     color: var(--color-gray-0);
     border: 1px solid var(--color-gray-0);
     margin: 2px;
+    font-size: 18px;
   }
 
   div {

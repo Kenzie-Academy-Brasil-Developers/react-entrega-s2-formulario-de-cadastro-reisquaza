@@ -1,7 +1,11 @@
+import { useContext } from "react";
+import { UserContext } from "../../contexts/UserContexts";
 import { ContainerNav } from "../../styles/container";
 import NavMain from "./style";
 
-const Nav = ({ logout }) => {
+const Nav = () => {
+  const { logout } = useContext(UserContext);
+
   return (
     <NavMain>
       <ContainerNav>

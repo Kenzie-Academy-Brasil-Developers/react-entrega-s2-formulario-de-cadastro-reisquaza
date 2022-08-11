@@ -68,7 +68,7 @@ const UserProvider = ({ children }) => {
         setTimeout(() => {
           navigate("/login", { replace: true });
         }, 2000);
-        
+
         toast.success("Email criado com sucesso!", {
           position: "top-right",
           autoClose: 2000,
@@ -92,8 +92,13 @@ const UserProvider = ({ children }) => {
       });
   };
 
+  const logout = () => {
+    localStorage.clear();
+    navigate("/login", { replace: true });
+  };
+
   return (
-    <UserContext.Provider value={{ singIn, singUp, user, loading }}>
+    <UserContext.Provider value={{ singIn, singUp, logout, user, loading }}>
       {children}
     </UserContext.Provider>
   );

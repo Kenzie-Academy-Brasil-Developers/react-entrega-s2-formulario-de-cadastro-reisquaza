@@ -6,7 +6,6 @@ import { Button, ButtonGray } from "../../components/Button";
 import { Form } from "../../components/Form";
 import { useContext } from "react";
 import { UserContext } from "../../contexts/UserContexts";
-import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const Login = ({ navigate }) => {
@@ -23,21 +22,6 @@ const Login = ({ navigate }) => {
   return (
     <ContainerForm>
       <h1>Kenzie Hub</h1>
-      <ToastContainer
-        position="top-right"
-        autoClose={3000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        toastStyle={{
-          color: "var(--color-gray-0)",
-          backgroundColor: "var(--color-gray-3)",
-        }}
-      />
       <Form onSubmit={handleSubmit(singIn)}>
         <h3>Login</h3>
         <label htmlFor="email">
