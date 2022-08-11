@@ -12,7 +12,13 @@ export default createGlobalStyle`
     --color-gray-0: #F8F9FA;
     --color-success: #168821;
     --color-error: #E60000;
-    font-size: 60%;   
+    font-size: 60%; 
+
+    --toastify-icon-color-success: var(--color-success);
+    --toastify-icon-color-error: var(--color-error);
+
+    --toastify-color-progress-success: var(--color-success);
+    --toastify-color-progress-error: var(--color-error);
   }
   @media (min-width: 700px) {
     :root {
