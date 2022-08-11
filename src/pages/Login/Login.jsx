@@ -1,13 +1,15 @@
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { loginSchema } from "../../validators/user";
-import api from "../../services/api";
-import toast, { Toaster } from "react-hot-toast";
 import { ContainerForm } from "../../styles/container";
 import { Button, ButtonGray } from "../../components/Button";
 import { Form } from "../../components/Form";
+import { useContext } from "react";
+import { UserContext } from "../../contexts/UserContexts";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
-const Login = ({ setAuthorized, setUser, navigate }) => {
+const Login = ({ navigate }) => {
   const {
     register,
     handleSubmit,
@@ -16,40 +18,27 @@ const Login = ({ setAuthorized, setUser, navigate }) => {
     resolver: yupResolver(loginSchema),
   });
 
-  const onSubmit = (data) => {
-    api
-      .post(`/sessions`, data)
-      .then((res) => {
-        window.localStorage.clear();
-
-        window.localStorage.setItem("@TOKEN", res.data.token);
-        window.localStorage.setItem("@USERID", res.data.user.id);
-
-        setAuthorized(true);
-        setUser(res.data.user);
-        navigate("/dashboard", { replace: true });
-      })
-      .catch((err) => {
-        // toast.error(err.response.data.message);
-        toast.error("Email ou senha inválidos", {
-          style: {
-            background: "var(--color-gray-3)",
-            color: "var(--color-gray-0)",
-            width: "20%",
-            height: "60px",
-          },
-        });
-      });
-  };
+  const { singIn } = useContext(UserContext);
 
   return (
     <ContainerForm>
-      <Toaster position="top-right" reverseOrder={false} />
       <h1>Kenzie Hub</h1>
-      <Form
-        onSubmit={handleSubmit(onSubmit)}
-        onError={() => toast.error("erro")}
-      >
+      <ToastContainer
+        position="top-right"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        toastStyle={{
+          color: "var(--color-gray-0)",
+          backgroundColor: "var(--color-gray-3)",
+        }}
+      />
+      <Form onSubmit={handleSubmit(singIn)}>
         <h3>Login</h3>
         <label htmlFor="email">
           <p>Email</p>
