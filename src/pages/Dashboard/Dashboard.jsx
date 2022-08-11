@@ -1,22 +1,28 @@
-import { useEffect } from "react";
+import { useContext, useEffect } from "react";
 import Nav from "../../components/Nav";
+import { Navigate } from "react-router-dom";
+import { UserContext } from "../../contexts/UserContexts";
 import { Container, ContainerHeader } from "../../styles/container";
 import { Header } from "./style";
 
-const Dashboard = ({ setAuthorized, user, navigate, token }) => {
+const Dashboard = ({ navigate }) => {
+  const { user } = useContext(UserContext);
+
   const logout = () => {
     window.localStorage.clear();
     navigate("/login", { replace: true });
   };
 
-  useEffect(() => {
-    if (!token) {
-      navigate("/login", { replace: true });
-    }
-  }, [token, navigate]);
+  const tste = (e) => {
+    console.log(user);
+    const tchs = user.techs;
+
+    console.log(tchs);
+  };
 
   return (
     <>
+      <button onClick={tste}>aaaaaa</button>
       <Nav logout={logout} />
       <Header>
         <ContainerHeader>
@@ -26,10 +32,8 @@ const Dashboard = ({ setAuthorized, user, navigate, token }) => {
       </Header>
       <Container>
         <div>
-          <h2>Que pena! Estamos em desenvolvimento</h2>
-          <h3>
-            Nossa aplicação está em desenvolvimento, em breve teremos novidades
-          </h3>
+          <h3>Tecnologias</h3>
+          <button>+</button>
         </div>
       </Container>
     </>
