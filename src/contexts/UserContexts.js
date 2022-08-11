@@ -61,8 +61,39 @@ const UserProvider = ({ children }) => {
     navigate(toNavigate, { replace: true });
   };
 
+  const singUp = async (data) => {
+    await api
+      .post("/users", data)
+      .then(() => {
+        setTimeout(() => {
+          navigate("/login", { replace: true });
+        }, 2000);
+        
+        toast.success("Email criado com sucesso!", {
+          position: "top-right",
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+      })
+      .catch((err) => {
+        toast.error(err.response.data.message, {
+          position: "top-right",
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+      });
+  };
+
   return (
-    <UserContext.Provider value={{ singIn, user, loading }}>
+    <UserContext.Provider value={{ singIn, singUp, user, loading }}>
       {children}
     </UserContext.Provider>
   );
