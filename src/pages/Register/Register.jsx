@@ -2,13 +2,15 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { registerSchema } from "../../validators/user";
 import { Link } from "react-router-dom";
-import toast, { Toaster } from "react-hot-toast";
-import api from "../../services/api";
 import { FormRegister } from "../../components/Form";
 import { Button } from "../../components/Button";
 import { ContainerForm } from "../../styles/container";
+import { useContext } from "react";
+import { UserContext } from "../../contexts/UserContexts";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
-const Register = ({ navigate }) => {
+const Register = () => {
   const {
     register,
     handleSubmit,
@@ -17,34 +19,27 @@ const Register = ({ navigate }) => {
     resolver: yupResolver(registerSchema),
   });
 
-  const onSubmit = (data) => {
-    api
-      .post(`/users`, data)
-      .then(() => {
-        toast.success("Usuario criaado com sucesso!");
-
-        setTimeout(() => {
-          navigate("/login", { replace: true });
-        }, 2500);
-      })
-      .catch((err) => {
-        // toast.error(err.response.data.message);
-        toast.error("Email já existe", {
-          style: {
-            background: "var(--color-gray-3)",
-            color: "var(--color-gray-0)",
-            width: "20%",
-            height: "60px",
-          },
-        });
-      });
-  };
+  const { singUp } = useContext(UserContext);
 
   return (
     <ContainerForm>
-      <Toaster position="top-right" reverseOrder={false} />
+      <ToastContainer
+        position="top-right"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        toastStyle={{
+          color: "var(--color-gray-0)",
+          backgroundColor: "var(--color-gray-3)",
+        }}
+      />
       <h1>Kenzie Hub</h1>
-      <FormRegister onSubmit={handleSubmit(onSubmit)}>
+      <FormRegister onSubmit={handleSubmit(singUp)}>
         <label htmlFor="name">
           <p>Nome</p>
           <input id="name" {...register("name")} />
