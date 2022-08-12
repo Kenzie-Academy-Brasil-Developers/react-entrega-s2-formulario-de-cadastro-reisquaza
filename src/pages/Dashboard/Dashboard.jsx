@@ -7,17 +7,20 @@ import { VscTrash } from "react-icons/vsc";
 import { GoPlus } from "react-icons/go";
 import Nav from "../../components/Nav";
 import ModalCreateTech from "../../components/ModalCreateTech";
+import ModalEditTech from "../../components/ModalEditTech";
 import TechList from "../../components/TechList/TechList";
 
 const Dashboard = () => {
   const { user } = useContext(UserContext);
   const { deleteTech } = useContext(TechsContext);
-  const [isOpenModal, setIsOpenModal] = useState(false);
+  const [isCreateTech, setIsCreateTech] = useState(false);
+  const [isEditTech, setIsEditTech] = useState();
 
   const userTechs = user.techs;
 
   return (
     <>
+      <button onClick={() => setIsEditTech(!isEditTech)}>teste</button>
       <Nav />
       <Header>
         <ContainerHeader>
@@ -28,12 +31,14 @@ const Dashboard = () => {
       <Container>
         <Tech>
           <h3>Tecnologias</h3>
-          <button onClick={() => setIsOpenModal(!isOpenModal)}>
+          <button onClick={() => setIsCreateTech(!isCreateTech)}>
             <GoPlus />
           </button>
         </Tech>
 
-        {isOpenModal && <ModalCreateTech setIsOpenModal={setIsOpenModal} />}
+        {isCreateTech && <ModalCreateTech setIsCreateTech={setIsCreateTech} />}
+        
+        {isEditTech && <ModalEditTech setIsEditTech={setIsEditTech} />}
 
         <TechList>
           {userTechs.map(({ id, title, status }) => {
@@ -41,7 +46,9 @@ const Dashboard = () => {
               <li key={id}>
                 <h3>{title}</h3>
                 <p>{status}</p>
-                {/* <button onClick={() => editTech(id)}>editar</button> */}
+                <button onClick={() => setIsEditTech(!isEditTech)}>
+                  editar
+                </button>
                 <button onClick={() => deleteTech(id)}>
                   <VscTrash />
                 </button>

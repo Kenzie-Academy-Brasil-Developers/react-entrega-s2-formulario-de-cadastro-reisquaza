@@ -25,7 +25,7 @@ const TechList = styled.ul`
 
   button {
     color: var(--color-gray-1);
-    background: none;
+    border: none;
   }
 
   @media screen and (min-width: 768px) {
