@@ -66,3 +66,9 @@ export const Form = styled.form`
 export const FormRegister = styled(Form)`
   height: 95%;
 `;
+
+export const FormModal = styled(Form)`
+  margin: 0;
+  height: 90%;
+  width: 100%;
+`
