@@ -18,8 +18,19 @@ export const Button = styled.button`
 
 export const ButtonGray = styled(Button)`
   background: var(--color-gray-1);
-  
+
   :hover {
-    background: var(--color-gray-2)
+    background: var(--color-gray-2);
   }
+`;
+
+export const ButtonDelete = styled(ButtonGray)`
+  width: 30%;
+  padding: 15px;
+  border: none;
+  border-radius: 8px;
+`;
+
+export const ButtonEdit = styled(Button)`
+  width: 65%;
 `;

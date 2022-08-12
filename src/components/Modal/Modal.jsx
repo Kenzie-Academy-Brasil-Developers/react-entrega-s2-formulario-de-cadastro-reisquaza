@@ -1,15 +1,15 @@
-import { useEffect, useRef } from "react";
 import { ContainerModal } from "../../styles/container";
 import { MdClose } from "react-icons/md";
 import { ModalBox, ModalTitle } from "./style";
+import { useEffect, useRef } from "react";
 
-const Modal = ({ children, title, setIsOpenModal }) => {
+const Modal = ({ children, title, setIs, closeModal }) => {
   const modalRef = useRef();
 
   useEffect(() => {
     const handleOutClick = (e) => {
       if (!modalRef.current.contains(e.target)) {
-        setIsOpenModal(false);
+        setIs(false);
       }
     };
 
@@ -18,14 +18,14 @@ const Modal = ({ children, title, setIsOpenModal }) => {
     return () => {
       document.removeEventListener("mousedown", handleOutClick);
     };
-  }, [setIsOpenModal]);
+  }, [setIs]);
 
   return (
     <ContainerModal>
       <ModalBox ref={modalRef}>
         <ModalTitle>
           <h3>{title}</h3>
-          <button onClick={() => setIsOpenModal(false)}>
+          <button onClick={closeModal}>
             <MdClose />
           </button>
         </ModalTitle>
