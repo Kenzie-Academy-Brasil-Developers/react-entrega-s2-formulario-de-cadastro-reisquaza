@@ -14,13 +14,21 @@ const Dashboard = () => {
   const { user } = useContext(UserContext);
   const { deleteTech } = useContext(TechsContext);
   const [isCreateTech, setIsCreateTech] = useState(false);
-  const [isEditTech, setIsEditTech] = useState();
+  const [isEditTech, setIsEditTech] = useState(false);
+  const [techInfo, setTechInfo] = useState();
 
   const userTechs = user.techs;
+  const editTech = (id, title) => {
+    const info = {
+      id: id,
+      title: title,
+    };
+    setIsEditTech(!isEditTech);
+    setTechInfo(info);
+  };
 
   return (
     <>
-      <button onClick={() => setIsEditTech(!isEditTech)}>teste</button>
       <Nav />
       <Header>
         <ContainerHeader>
@@ -37,8 +45,10 @@ const Dashboard = () => {
         </Tech>
 
         {isCreateTech && <ModalCreateTech setIsCreateTech={setIsCreateTech} />}
-        
-        {isEditTech && <ModalEditTech setIsEditTech={setIsEditTech} />}
+
+        {isEditTech && (
+          <ModalEditTech setIsEditTech={setIsEditTech} techInfo={techInfo} />
+        )}
 
         <TechList>
           {userTechs.map(({ id, title, status }) => {
@@ -46,9 +56,7 @@ const Dashboard = () => {
               <li key={id}>
                 <h3>{title}</h3>
                 <p>{status}</p>
-                <button onClick={() => setIsEditTech(!isEditTech)}>
-                  editar
-                </button>
+                <button onClick={() => editTech(id, title)}>editar</button>
                 <button onClick={() => deleteTech(id)}>
                   <VscTrash />
                 </button>

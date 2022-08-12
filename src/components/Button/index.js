@@ -32,5 +32,5 @@ export const ButtonDelete = styled(ButtonGray)`
 `;
 
 export const ButtonEdit = styled(Button)`
-  width: 60%;
+  width: 65%;
 `;
