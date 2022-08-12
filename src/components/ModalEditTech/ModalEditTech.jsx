@@ -1,11 +1,13 @@
 import { useContext } from "react";
+import { ModalContext } from "../../contexts/ModalContexts";
 import { TechsContext } from "../../contexts/TechsContexts";
 import { ButtonDelete, ButtonEdit } from "../Button";
 import FormTech from "../FormTech";
 import Modal from "../Modal/Modal";
 
-const ModalEditTech = ({ setIsEditTech, techInfo }) => {
+const ModalEditTech = ({ techInfo }) => {
   const { deleteTech, editTech } = useContext(TechsContext);
+  const { setIsEditTech } = useContext(ModalContext);
   const { id, title } = techInfo;
 
   const closeModal = () => {

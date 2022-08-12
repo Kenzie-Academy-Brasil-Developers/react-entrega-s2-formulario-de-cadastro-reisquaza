@@ -1,31 +1,32 @@
 import styled from "styled-components";
 
-const TechList = styled.ul`
+const TechList = styled.div`
   background: var(--color-gray-2);
   padding: 5px;
   margin-top: 15px;
   border-radius: 5px;
 
-  li {
-    display: flex;
+  button {
     width: 97%;
-    justify-content: space-between;
     padding: 10px;
     margin: 10px;
+
+    display: flex;
+    justify-content: space-between;
+
     background: var(--color-gray-4);
+    color: var(--color-gray-1);
+
+    border: none;
     border-radius: 8px;
   }
 
-  h3 {
-    width: 65%;
-  }
-  p {
-    width: 35%;
+  button:hover {
+    background: var(--color-gray-3);
   }
 
-  button {
-    color: var(--color-gray-1);
-    border: none;
+  p {
+    width: 35%;
   }
 
   @media screen and (min-width: 768px) {
