@@ -2,8 +2,8 @@ import { useContext, useState } from "react";
 import { UserContext } from "../../contexts/UserContexts";
 import { Container, ContainerHeader } from "../../styles/container";
 import { Header, Tech } from "./style";
-import { TechsContext } from "../../contexts/TechsContexts";
-import { VscTrash } from "react-icons/vsc";
+// import { TechsContext } from "../../contexts/TechsContexts";
+// import { VscTrash } from "react-icons/vsc";
 import { GoPlus } from "react-icons/go";
 import { ModalContext } from "../../contexts/ModalContexts";
 import Nav from "../../components/Nav";
@@ -13,7 +13,7 @@ import TechList from "../../components/TechList/TechList";
 
 const Dashboard = () => {
   const { user } = useContext(UserContext);
-  const { deleteTech } = useContext(TechsContext);
+  // const { deleteTech } = useContext(TechsContext);
   const { isCreateTech, setIsCreateTech } = useContext(ModalContext);
   const { isEditTech, setIsEditTech } = useContext(ModalContext);
   const [techInfo, setTechInfo] = useState();
