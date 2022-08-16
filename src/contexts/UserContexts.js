@@ -31,7 +31,7 @@ const UserProvider = ({ children }) => {
     };
 
     loadUser();
-  });
+  }, []);
 
   const singIn = async (data) => {
     const response = await api.post("/sessions", data).catch((err) => {
