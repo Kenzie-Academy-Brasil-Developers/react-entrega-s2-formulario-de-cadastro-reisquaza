@@ -7,6 +7,7 @@ import { Button } from "../../components/Button";
 import { ContainerForm } from "../../styles/container";
 import { useContext } from "react";
 import { UserContext } from "../../contexts/UserContexts";
+import { iData } from "../../contexts/UserContexts";
 import "react-toastify/dist/ReactToastify.css";
 
 const Register = () => {
@@ -14,7 +15,7 @@ const Register = () => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm({
+  } = useForm<iData>({
     resolver: yupResolver(registerSchema),
   });
 
