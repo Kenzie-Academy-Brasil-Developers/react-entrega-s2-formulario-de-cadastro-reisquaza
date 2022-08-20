@@ -1,11 +1,44 @@
+import { HeadersDefaults } from "axios";
 import { createContext, useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import api from "../services/api";
 
-export const UserContext = createContext({});
+interface iUserProvider {
+  children: React.ReactNode;
+}
 
-const UserProvider = ({ children }) => {
+interface iUserContext {
+  singIn: (data: iData) => void;
+  singUp: (data: iData) => void;
+  logout: () => void;
+  user: null;
+  loading: boolean;
+}
+
+interface iHeadersDefault extends HeadersDefaults {
+  Authorization: string;
+}
+
+export interface iData {
+  // id: string;
+  email: string;
+  password: string;
+  name?: string;
+  bio?: string;
+  contact?: string;
+  course_module?: string;
+}
+
+interface iLocationState {
+  from: {
+    pathname: string;
+  };
+}
+
+export const UserContext = createContext<iUserContext>({} as iUserContext);
+
+const UserProvider = ({ children }: iUserProvider) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
@@ -18,7 +51,9 @@ const UserProvider = ({ children }) => {
 
       if (token) {
         try {
-          api.defaults.headers.authorization = `Bearer ${token}`;
+          api.defaults.headers = {
+            Authorization: `Bearer ${token}`,
+          } as iHeadersDefault;
 
           const { data } = await api.get(`/users/${userID}`);
 
@@ -31,37 +66,40 @@ const UserProvider = ({ children }) => {
     };
 
     loadUser();
-  }, []);
+  }, [user]);
 
-  const singIn = async (data) => {
-    const response = await api.post("/sessions", data).catch((err) => {
-      localStorage.clear();
-      toast.error(err.response.data.message, {
-        position: "top-right",
-        autoClose: 3000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
+  const singIn = async (data: iData) => {
+    const response = await api
+      .post("/sessions", data)
+      .then((res) => res.data)
+      .catch((err) => {
+        localStorage.clear();
+        toast.error(err.response.data.message, {
+          position: "top-right",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
       });
-    });
 
-    const { user: userResponse, token } = response.data;
-
-    api.defaults.headers.authorization = `Bearer ${token}`;
+    const { user: userResponse, token } = response;
 
     setUser(userResponse);
 
     localStorage.setItem("@kenzie-hub:token", token);
     localStorage.setItem("@kenzie-hub:userID", userResponse.id);
 
-    const toNavigate = location.state?.from?.pathname || "/dashboard";
+    const { from } = location.state as iLocationState;
+
+    const toNavigate = from?.pathname || "/dashboard";
 
     navigate(toNavigate, { replace: true });
   };
 
-  const singUp = async (data) => {
+  const singUp = async (data: iData) => {
     await api
       .post("/users", data)
       .then(() => {
