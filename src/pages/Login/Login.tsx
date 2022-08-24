@@ -7,13 +7,14 @@ import { Form } from "../../components/Form";
 import { useContext } from "react";
 import { UserContext } from "../../contexts/UserContexts";
 import "react-toastify/dist/ReactToastify.css";
+import { iData } from "../../contexts/UserContexts";
 
-const Login = ({ navigate }) => {
+const Login = ({ navigate }: any) => {
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm({
+  } = useForm<iData>({
     resolver: yupResolver(loginSchema),
   });
 
