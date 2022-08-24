@@ -2,8 +2,6 @@ import { useContext, useState } from "react";
 import { UserContext } from "../../contexts/UserContexts";
 import { Container, ContainerHeader } from "../../styles/container";
 import { Header, Tech } from "./style";
-// import { TechsContext } from "../../contexts/TechsContexts";
-// import { VscTrash } from "react-icons/vsc";
 import { GoPlus } from "react-icons/go";
 import { ModalContext } from "../../contexts/ModalContexts";
 import Nav from "../../components/Nav";
@@ -11,21 +9,25 @@ import ModalCreateTech from "../../components/ModalCreateTech";
 import ModalEditTech from "../../components/ModalEditTech";
 import TechList from "../../components/TechList/TechList";
 
+interface iUserTech {
+  id: string;
+  title: string;
+  status: string;
+}
+
 const Dashboard = () => {
   const { user } = useContext(UserContext);
-  // const { deleteTech } = useContext(TechsContext);
   const { isCreateTech, setIsCreateTech } = useContext(ModalContext);
   const { isEditTech, setIsEditTech } = useContext(ModalContext);
-  const [techInfo, setTechInfo] = useState();
-
+  const [editID, setEditID] = useState<string>('');
+  const [editTitle, setEditTitle] = useState<string>('');
+ 
   const userTechs = user.techs;
-  const editTech = (id, title) => {
-    const info = {
-      id: id,
-      title: title,
-    };
+  
+  const editTech = (id: string, title: string) => {
     setIsEditTech(!isEditTech);
-    setTechInfo(info);
+    setEditID(id);
+    setEditTitle(title);
   };
 
   return (
@@ -47,18 +49,14 @@ const Dashboard = () => {
 
         {isCreateTech && <ModalCreateTech />}
 
-        {isEditTech && <ModalEditTech techInfo={techInfo} />}
+        {isEditTech && <ModalEditTech editID={editID} editTitle={editTitle} />}
 
         <TechList>
-          {userTechs.map(({ id, title, status }) => {
+          {userTechs.map(({ id, title, status }: iUserTech) => {
             return (
               <button key={id} onClick={() => editTech(id, title)}>
                 <h3>{title}</h3>
                 <p>{status}</p>
-                {/* <button onClick={() => editTech(id, title)}>editar</button>
-                <button onClick={() => deleteTech(id)}>
-                  <VscTrash />
-                </button> */}
               </button>
             );
           })}

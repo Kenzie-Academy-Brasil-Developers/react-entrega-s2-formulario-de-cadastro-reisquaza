@@ -10,7 +10,7 @@ const ProtectedRoutes = () => {
     return <div>Carregando...</div>;
   }
 
-  return user ? (
+  return user.id ? (
     <Outlet />
   ) : (
     <Navigate to="/login" replace state={{ from: location }} />

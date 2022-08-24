@@ -5,28 +5,32 @@ import { ButtonDelete, ButtonEdit } from "../Button";
 import FormTech from "../FormTech";
 import Modal from "../Modal/Modal";
 
-const ModalEditTech = ({ techInfo }) => {
+interface iModalEdit {
+  editID: string;
+  editTitle: string;
+}
+
+const ModalEditTech = ({ editID, editTitle }: iModalEdit) => {
   const { deleteTech, editTech } = useContext(TechsContext);
   const { setIsEditTech } = useContext(ModalContext);
-  const { id, title } = techInfo;
 
   const closeModal = () => {
     setIsEditTech(false);
   };
 
   return (
-    <Modal closeModal={closeModal} title="aaa" setIs={setIsEditTech}>
+    <Modal closeModal={closeModal} title='Editar tecnologia' setIs={setIsEditTech}>
       <FormTech
         techSubmit={(data) => {
           const status = { status: data.status };
-          editTech(status, id);
+          editTech(status, editID);
         }}
         disable={true}
-        title={title}
+        title={editTitle}
       >
         <div>
           <ButtonEdit type="submit">Editar tecnologia</ButtonEdit>
-          <ButtonDelete type="button" onClick={() => deleteTech(id)}>
+          <ButtonDelete type="button" onClick={() => deleteTech(editID)}>
             Excluir
           </ButtonDelete>
         </div>

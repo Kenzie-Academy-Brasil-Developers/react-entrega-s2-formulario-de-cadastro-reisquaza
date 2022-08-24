@@ -1,7 +1,8 @@
 import { HeadersDefaults } from "axios";
 import { createContext, useEffect, useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { toastError, toastSuccess } from "../components/toastifySettings";
 import api from "../services/api";
 
 interface iUserProvider {
@@ -12,7 +13,7 @@ interface iUserContext {
   singIn: (data: iData) => void;
   singUp: (data: iData) => void;
   logout: () => void;
-  user: null;
+  user: iData;
   loading: boolean;
 }
 
@@ -21,7 +22,7 @@ interface iHeadersDefault extends HeadersDefaults {
 }
 
 export interface iData {
-  // id: string;
+  id: string;
   email: string;
   password: string;
   name: string;
@@ -29,9 +30,10 @@ export interface iData {
   contact: string;
   course_module: string;
   passwordConfirm?: string;
+  techs: [];
 }
 
-interface iLocationState {
+export interface iLocationState {
   from: {
     pathname: string;
   };
@@ -40,10 +42,9 @@ interface iLocationState {
 export const UserContext = createContext<iUserContext>({} as iUserContext);
 
 const UserProvider = ({ children }: iUserProvider) => {
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState<iData>({} as iData);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
-  const location = useLocation();
 
   useEffect(() => {
     const loadUser = async () => {
@@ -67,7 +68,7 @@ const UserProvider = ({ children }: iUserProvider) => {
     };
 
     loadUser();
-  }, [user]);
+  }, []);
 
   const singIn = async (data: iData) => {
     const response = await api
@@ -75,15 +76,7 @@ const UserProvider = ({ children }: iUserProvider) => {
       .then((res) => res.data)
       .catch((err) => {
         localStorage.clear();
-        toast.error(err.response.data.message, {
-          position: "top-right",
-          autoClose: 3000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-        });
+        toastError(err.response.data.message);
       });
 
     const { user: userResponse, token } = response;
@@ -92,12 +85,6 @@ const UserProvider = ({ children }: iUserProvider) => {
 
     localStorage.setItem("@kenzie-hub:token", token);
     localStorage.setItem("@kenzie-hub:userID", userResponse.id);
-
-    const { from } = location.state as iLocationState;
-
-    const toNavigate = from?.pathname || "/dashboard";
-
-    navigate(toNavigate, { replace: true });
   };
 
   const singUp = async (data: iData) => {
@@ -107,27 +94,10 @@ const UserProvider = ({ children }: iUserProvider) => {
         setTimeout(() => {
           navigate("/login", { replace: true });
         }, 2000);
-
-        toast.success("Email criado com sucesso!", {
-          position: "top-right",
-          autoClose: 2000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-        });
+        toastSuccess("Email criado com sucesso!");
       })
       .catch((err) => {
-        toast.error(err.response.data.message, {
-          position: "top-right",
-          autoClose: 2000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-        });
+        toastError(err.response.data.message);
       });
   };
 

@@ -4,54 +4,49 @@ import { toastError, toastSuccess } from "../components/toastifySettings";
 import api from "../services/api";
 import { ModalContext } from "./ModalContexts";
 
+export interface iTechContext {
+  createTech: (data: iTech) => void;
+  deleteTech: (id: string) => void;
+  editTech: (data: object, id: string) => void;
+}
+
 interface iTechsProvider {
   children: ReactNode;
 }
 
-interface iData {
+export interface iTech {
+  id: string;
   title: string;
   status: string;
 }
 
-interface iTechID {
-  techID: string;
-}
-
-export const TechsContext = createContext({});
+export const TechsContext = createContext<iTechContext>({} as iTechContext);
 
 const TechsProvider = ({ children }: iTechsProvider) => {
   const { setIsEditTech, setIsCreateTech } = useContext(ModalContext);
 
-  const createTech = (data: iData) => {
+  const createTech = (data: iTech) => {
     api
       .post("/users/techs", data)
       .then(() => {
         setIsCreateTech(false);
-        toastSuccess();
+        toastSuccess("Tecnologia criada com sucesso!");
       })
       .catch((err) => {
         toastError(err.response.data.message);
       });
   };
 
-  const deleteTech = (techID: iTechID) => {
-    api.delete(`/users/techs/${techID}`).then(() => {
+  const deleteTech = (id: string) => {
+    api.delete(`/users/techs/${id}`).then(() => {
       setIsEditTech(false);
-      toast.success("Tecnologia deletada com sucesso!", {
-        position: "top-right",
-        autoClose: 2000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-      });
+      toastSuccess("Tecnologia deletada com sucesso!");
     });
   };
 
-  const editTech = (data: iData, techID: iTechID) => {
+  const editTech = (data: object, id: string) => {
     api
-      .put(`/users/techs/${techID}`, data)
+      .put(`/users/techs/${id}`, data)
       .then(() => {
         setIsEditTech(false);
         toast.success("Tecnologia editada com sucesso!");
