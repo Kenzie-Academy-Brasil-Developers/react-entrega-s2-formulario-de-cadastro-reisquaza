@@ -1,7 +1,7 @@
 import { toast } from "react-toastify";
 
-export const toastSuccess = () =>
-  toast.success("Tecnologia criada com sucesso!", {
+export const toastSuccess = (sucessMessage: string) =>
+  toast.success(sucessMessage, {
     position: "top-right",
     autoClose: 2000,
     hideProgressBar: false,
@@ -11,8 +11,8 @@ export const toastSuccess = () =>
     progress: undefined,
 });
 
-export const toastError = (errorMassage: string) =>
-  toast.error(errorMassage, {
+export const toastError = (errorMessage: string) =>
+  toast.error(errorMessage, {
     position: "top-right",
     autoClose: 2000,
     hideProgressBar: false,

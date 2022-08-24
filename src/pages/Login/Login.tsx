@@ -8,10 +8,16 @@ import { useContext } from "react";
 import { UserContext } from "../../contexts/UserContexts";
 import "react-toastify/dist/ReactToastify.css";
 import { iData } from "../../contexts/UserContexts";
+import { NavigateFunction } from "react-router-dom";
 
 // type iUserLogin = Omit<iData, 'name' | 'bio' | 'contact' | 'course_module'>
 
-const Login = ({ navigate }: any) => {
+interface iLogin {
+  navigate: NavigateFunction
+}
+
+const Login = ({ navigate }: iLogin) => {
+
   const {
     register,
     handleSubmit,

@@ -1,8 +1,19 @@
-import { useForm } from "react-hook-form";
+import { ReactNode } from "react";
+import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
+import { iTech } from "../../contexts/TechsContexts";
 import { FormModal } from "../Form";
 
-const FormTech = ({ children, techSubmit, disable, title }) => {
+interface iFormTech {
+  children: ReactNode;
+  disable?: boolean;
+  title?: string;
+  techSubmit: SubmitHandler<FieldValues>;
+}
+
+const FormTech = ({ children, techSubmit, disable, title }: iFormTech) => {
   const { register, handleSubmit } = useForm();
+
+  // console.log(techSubmit)
 
   return (
     <FormModal onSubmit={handleSubmit(techSubmit)}>

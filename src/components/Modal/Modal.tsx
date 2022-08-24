@@ -1,15 +1,22 @@
 import { ContainerModal } from "../../styles/container";
 import { MdClose } from "react-icons/md";
 import { ModalBox, ModalTitle } from "./style";
-import { useEffect, useRef } from "react";
+import { ReactNode, useEffect, useRef } from "react";
 
-const Modal = ({ children, title, setIs, closeModal }) => {
-  const modalRef = useRef();
+interface iModal {
+  children: ReactNode;
+  title: string;
+  setIs: (arg0: boolean) => void;
+  closeModal: () => void;
+}
+
+const Modal = ({ children, title, setIs, closeModal }: iModal) => {
+  const modalRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const handleOutClick = (e) => {
-      if (!modalRef.current.contains(e.target)) {
-        setIs(false);
+    const handleOutClick = (e: any) => {
+      if(null !== modalRef.current){
+        !modalRef.current.contains(e.target) && setIs(false)
       }
     };
 
