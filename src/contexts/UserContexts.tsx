@@ -24,10 +24,11 @@ export interface iData {
   // id: string;
   email: string;
   password: string;
-  name?: string;
-  bio?: string;
-  contact?: string;
-  course_module?: string;
+  name: string;
+  bio: string;
+  contact: string;
+  course_module: string;
+  passwordConfirm?: string;
 }
 
 interface iLocationState {

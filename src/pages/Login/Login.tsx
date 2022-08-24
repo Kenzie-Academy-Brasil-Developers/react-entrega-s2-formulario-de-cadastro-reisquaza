@@ -9,6 +9,8 @@ import { UserContext } from "../../contexts/UserContexts";
 import "react-toastify/dist/ReactToastify.css";
 import { iData } from "../../contexts/UserContexts";
 
+// type iUserLogin = Omit<iData, 'name' | 'bio' | 'contact' | 'course_module'>
+
 const Login = ({ navigate }: any) => {
   const {
     register,
