@@ -68,7 +68,7 @@ const UserProvider = ({ children }: iUserProvider) => {
     };
 
     loadUser();
-  }, []);
+  }, [user]);
 
   const singIn = async (data: iData) => {
     const response = await api
