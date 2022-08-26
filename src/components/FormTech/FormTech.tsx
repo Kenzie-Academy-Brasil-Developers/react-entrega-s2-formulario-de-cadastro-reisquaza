@@ -1,16 +1,16 @@
 import { ReactNode } from "react";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
-import { iTech } from "../../contexts/TechsContexts";
 import { FormModal } from "../Form";
 
 interface iFormTech {
   children: ReactNode;
-  disable?: boolean;
+  disable: boolean;
   title?: string;
   techSubmit: SubmitHandler<FieldValues>;
+  value?: string;
 }
 
-const FormTech = ({ children, techSubmit, disable, title }: iFormTech) => {
+const FormTech = ({ children, techSubmit, disable, title, ...rest }: iFormTech) => {
   const { register, handleSubmit } = useForm();
 
   // console.log(techSubmit)
@@ -24,7 +24,7 @@ const FormTech = ({ children, techSubmit, disable, title }: iFormTech) => {
           id="title"
           {...register("title")}
           disabled={disable}
-          value={title}
+          {...rest}
         />
         {/* <h4>{errors.title?.message}</h4> */}
       </label>

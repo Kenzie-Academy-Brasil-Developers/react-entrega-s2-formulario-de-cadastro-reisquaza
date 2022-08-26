@@ -19,7 +19,7 @@ const ModalCreateTech = () => {
       title="Cadastrar tecnologia"
       closeModal={closeModal}
     >
-      <FormTech techSubmit={createTech} title={"Cadastrar tecnologia"}>
+      <FormTech techSubmit={createTech} title={"Cadastrar tecnologia"} disable={false}>
         <Button>Cadastrar</Button>
       </FormTech>
     </Modal>

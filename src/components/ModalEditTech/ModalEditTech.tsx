@@ -19,7 +19,11 @@ const ModalEditTech = ({ editID, editTitle }: iModalEdit) => {
   };
 
   return (
-    <Modal closeModal={closeModal} title='Editar tecnologia' setIs={setIsEditTech}>
+    <Modal
+      closeModal={closeModal}
+      title="Editar tecnologia"
+      setIs={setIsEditTech}
+    >
       <FormTech
         techSubmit={(data) => {
           const status = { status: data.status };
@@ -27,6 +31,7 @@ const ModalEditTech = ({ editID, editTitle }: iModalEdit) => {
         }}
         disable={true}
         title={editTitle}
+        value={editTitle}
       >
         <div>
           <ButtonEdit type="submit">Editar tecnologia</ButtonEdit>
